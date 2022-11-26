@@ -1,5 +1,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/scripts"))
 
+;; start the initial frame maximized
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
 (require 'package)
 
 (setq package-archives '( ("melpa" . "https://melpa.org/packages/")
@@ -44,6 +47,31 @@
   (package-install 'which-key)
   )
 
+(unless (package-installed-p 'vterm)
+  (package-install 'vterm)
+  )
+
+(use-package ibuffer
+  :ensure nil
+  :init
+  (use-package ibuffer-vc
+    :commands (ibuffer-vc-set-filter-groups-by-vc-root)
+    :custom
+    (ibuffer-vc-skip-if-remote 'nil))
+  :custom
+  (ibuffer-formats
+   '((mark modified read-only locked " "
+           (name 35 35 :left :elide)
+           " "
+           (size 9 -1 :right)
+           " "
+           (mode 16 16 :left :elide)
+           " " filename-and-process)
+     (mark " "
+           (name 16 -1)
+           " " filename))))
+
+
 (which-key-mode)
 
 (load-theme 'dracula t)
@@ -51,6 +79,7 @@
 (setq inhibit-startup-message t)
 (setq visible-bell nil)
 (global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
 (setq display-line-numbers 'relative)
 
 (scroll-bar-mode -1)
@@ -94,7 +123,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(which-key use-package)))
+ '(package-selected-packages '(vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
