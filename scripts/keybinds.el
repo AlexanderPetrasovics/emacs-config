@@ -7,6 +7,8 @@
 
 (evil-define-key 'normal 'global (kbd "<leader>bS") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-this-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>bb") 'ibuffer)
+  ;; :bind ("C-x C-b" . ibuffer)
 
 ;; Windows
 
