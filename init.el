@@ -81,6 +81,32 @@
   (package-install 'smart-mode-line-powerline-theme)
   )
 
+(unless (package-installed-p 'ivy )
+  (package-install 'ivy )
+  )
+
+(use-package ivy
+  :defer 0.1
+  :diminish
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x B" . ivy-switch-buffer-other-window))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-use-virtual-buffers t)
+  :config (ivy-mode))
+
+
+(use-package counsel
+  :after ivy
+  :config (counsel-mode)
+  )
+
+(use-package swiper
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
+
+(ivy-mode)
 (which-key-mode)
 
 
@@ -110,7 +136,7 @@
  '(custom-safe-themes
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(package-selected-packages
-   '(smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
