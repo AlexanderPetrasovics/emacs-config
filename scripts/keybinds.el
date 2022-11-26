@@ -1,4 +1,8 @@
 
+;; Standard (Re)-Bindings
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (evil-set-leader 'normal (kbd "SPC") )
 (evil-set-leader 'visual (kbd "SPC") )
@@ -21,11 +25,6 @@
 (evil-define-key 'normal 'global (kbd "<leader>wl") 'windmove-right)
 (evil-define-key 'normal 'global (kbd "<leader>wj") 'windmove-down)
 (evil-define-key 'normal 'global (kbd "<leader>wk") 'windmove-up)
-
-
-
-
-
 
 
 
