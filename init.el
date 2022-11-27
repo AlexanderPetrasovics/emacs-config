@@ -89,6 +89,10 @@
   (package-install 'company-web )
   )
 
+(unless (package-installed-p 'magit )
+  (package-install 'magit )
+  )
+
 (unless (package-installed-p 'ivy )
   (package-install 'ivy )
   )
@@ -132,6 +136,10 @@
                           (company-mode t)))
 
 (use-package projectile)
+(setq projectile-project-search-path '(
+				       ( "~/Documents/MKS" . 2)
+				       ( "~/Documents/Projects" . 2)
+				       ( "~/Documents/org" . 1 ) ) )
 (projectile-mode +1)
 
 (setq evil-want-C-u-scroll t)
@@ -159,7 +167,7 @@
  '(custom-safe-themes
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(package-selected-packages
-   '(rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
