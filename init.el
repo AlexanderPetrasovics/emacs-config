@@ -153,6 +153,9 @@
   )
 
 
+(setq-default org-display-custom-times t )
+(setq org-time-stamp-custom-formats '("<%d-%m-%y>". "<%d-%m-%y %a %H:%M>") )
+
 (require 'lsp-setup.el)
 (require 'appearance.el)
 (require 'keybinds.el)
