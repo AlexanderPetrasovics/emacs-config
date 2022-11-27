@@ -27,7 +27,7 @@
 (unless (package-installed-p 'simpleclip)
   (package-install 'simpleclip)
   )
-(simpleclip-mode 1)
+
 
 ;; Evil Mode \m/
 (unless (package-installed-p 'evil)
@@ -81,6 +81,14 @@
   (package-install 'smart-mode-line-powerline-theme)
   )
 
+(unless (package-installed-p 'company )
+  (package-install 'company )
+  )
+
+(unless (package-installed-p 'company-web )
+  (package-install 'company-web )
+  )
+
 (unless (package-installed-p 'ivy )
   (package-install 'ivy )
   )
@@ -106,10 +114,25 @@
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
 
+
+(use-package yasnippet :config (yas-global-mode))
+(use-package yasnippet-snippets :ensure t)
+
+
+(simpleclip-mode 1)
 (ivy-mode)
 (which-key-mode)
+(company-mode)
 
+(require 'company-web-html)        
+(add-hook 'after-init-hook 'global-company-mode)
 
+(add-hook 'web-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-web-html))
+                          (company-mode t)))
+
+(use-package projectile)
+(projectile-mode +1)
 
 (setq evil-want-C-u-scroll t)
 (setq evil-want-keybinding nil)
@@ -122,7 +145,7 @@
   )
 
 
-
+(require 'lsp-setup.el)
 (require 'appearance.el)
 (require 'keybinds.el)
 
@@ -136,7 +159,7 @@
  '(custom-safe-themes
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(package-selected-packages
-   '(counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

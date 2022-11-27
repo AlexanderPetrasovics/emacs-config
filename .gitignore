@@ -1,5 +1,17 @@
 *~
+.*
+.cache/
+
 auto-save-list/
 elpa/
 transient/
+auto-save-list/
+eclipse.jdt.ls/
+workspace/
+
+.dap-breakpoints
+.sp-session-v1
+recentf
+projectile-bookmarks.eld
+
 

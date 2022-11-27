@@ -1,9 +1,10 @@
 
 ;; Standard (Re)-Bindings
 
+(global-unset-key (kbd "C-z"))
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-
 
 ;; Ivy standard bindings
 
@@ -40,6 +41,11 @@
 (global-set-key (kbd "C-c o") 'counsel-outline)
 (global-set-key (kbd "C-c t") 'counsel-load-theme)
 (global-set-key (kbd "C-c F") 'counsel-org-file)
+
+;; Projectile
+
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(evil-define-key 'normal 'global (kbd "<leader>p") 'projectile-command-map)
 
 
 ;; Evil Mode 
