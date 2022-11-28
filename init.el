@@ -135,12 +135,66 @@
                           (set (make-local-variable 'company-backends) '(company-web-html))
                           (company-mode t)))
 
+
+;; Run THIS Command AFTER installing the package! -> M-x all-the-icons-install-fonts
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package org
+  :config
+  (setq org-ellipsis " ▼" )
+  (setq org-directory "~/Documents/org")
+  (setq org-agenda-files '("~/Documents/org/agenda.org") ) )
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '(
+			     (C . t) ;; C
+			     (shell . t)
+			     (lisp . t) ;; lisp
+			     (sed . t) ;;  SED
+			     (lua . t) ;; Lua
+			     (python . t) ;; Python
+			     (js . t) ;; Javascript
+
+			     ) )
+
+(use-package org-bullets
+  :after org
+  :hook ( org-mode . org-bullets-mode )
+  :custom
+  (org-bullets-bullet-list '(
+			    "◯"
+			    "○"
+			    "○"
+			    "○"
+			    "○"
+			    "○"
+			    "○" ) ) )
+
+
+;; Exports to HTML on save (Toggle)
+(defun toggle-org-html-export-on-save ()
+  (interactive)
+  (if (memq 'org-html-export-to-html after-save-hook)
+      (progn
+        (remove-hook 'after-save-hook 'org-html-export-to-html t)
+        (message "Disabled org html export on save for current buffer..."))
+    (add-hook 'after-save-hook 'org-html-export-to-html nil t)
+    (message "Enabled org html export on save for current buffer...")))
+
+(use-package ox-gfm)
+
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
+
+
 (use-package projectile)
 (setq projectile-project-search-path '(
 				       ( "~/Documents/MKS" . 2)
 				       ( "~/Documents/Projects" . 2)
 				       ( "~/Documents/org" . 1 ) ) )
 (projectile-mode +1)
+
 
 (setq evil-want-C-u-scroll t)
 (setq evil-want-keybinding nil)
@@ -169,8 +223,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
+ '(org-agenda-files '("~/Documents/org/agenda.org"))
  '(package-selected-packages
-   '(magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
