@@ -141,7 +141,7 @@
   :if (display-graphic-p))
 
 (use-package org
-  :config
+  :config 
   (setq org-ellipsis " ▼" )
   (setq org-directory "~/Documents/org")
   (setq org-agenda-files '("~/Documents/org/agenda.org") ) )
@@ -157,6 +157,10 @@
 			     (js . t) ;; Javascript
 
 			     ) )
+
+(setq org-plantuml-jar-path (expand-file-name "~/toolz/plantuml/plantuml.jar"))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+(org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
 
 (use-package org-bullets
   :after org
@@ -188,6 +192,16 @@
   '(require 'ox-gfm nil t))
 
 
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/Documents/org-roam") ;; Create directory before calling this
+  :bind ( ("C-c r l" . org-roam-buffer-toggle)
+	  ("C-c r f" . org-roam-node-find )
+	  ("C-c r i" . org-roam-node-insert ) )
+  :config
+  (org-roam-setup) )
+
 (use-package projectile)
 (setq projectile-project-search-path '(
 				       ( "~/Documents/MKS" . 2)
@@ -210,6 +224,7 @@
 (setq-default org-display-custom-times t )
 (setq org-time-stamp-custom-formats '("<%d-%m-%y>". "<%d-%m-%y %a %H:%M>") )
 
+
 (require 'lsp-setup.el)
 (require 'appearance.el)
 (require 'keybinds.el)
@@ -225,7 +240,7 @@
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(org-agenda-files '("~/Documents/org/agenda.org"))
  '(package-selected-packages
-   '(ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(org-roam ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

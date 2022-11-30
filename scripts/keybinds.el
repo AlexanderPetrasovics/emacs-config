@@ -48,6 +48,9 @@
 (evil-define-key 'normal 'global (kbd "<leader>p") 'projectile-command-map)
 
 
+;; Org-roam
+
+
 ;; Evil Mode 
 
 (evil-set-leader 'normal (kbd "SPC") )

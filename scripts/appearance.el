@@ -19,7 +19,7 @@
 
 ;; (set-face-attribute 'default nil :font "monospace" :height 110)
 ;; (set-face-attribute 'default nil :font "Droid Sans Mono" :height 110)
-(set-face-attribute 'default nil :font "Fira Code" :height 110)
+(set-face-attribute 'default nil :font "Fira Code" :height 120)
 (display-line-numbers-mode)
 
 (provide 'appearance.el)
