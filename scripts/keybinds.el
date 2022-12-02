@@ -6,6 +6,8 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+(global-set-key (kbd "C-x b") 'command-history)
+
 ;; Ivy standard bindings
 
 (global-set-key (kbd "C-s") 'swiper-isearch)
@@ -46,7 +48,7 @@
 
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (evil-define-key 'normal 'global (kbd "<leader>p") 'projectile-command-map)
-
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
 ;; Org-roam
 

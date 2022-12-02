@@ -140,11 +140,13 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
+
 (use-package org
   :config 
   (setq org-ellipsis " ▼" )
   (setq org-directory "~/Documents/org")
   (setq org-agenda-files '("~/Documents/org/agenda.org") ) )
+
 
 (org-babel-do-load-languages
  'org-babel-load-languages '(
@@ -155,12 +157,12 @@
 			     (lua . t) ;; Lua
 			     (python . t) ;; Python
 			     (js . t) ;; Javascript
+			     (plantuml . t) ;; Javascript
 
 			     ) )
 
-(setq org-plantuml-jar-path (expand-file-name "~/toolz/plantuml/plantuml.jar"))
-(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-(org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+(setq org-display-remote-inline-images t)
+
 
 (use-package org-bullets
   :after org
@@ -191,6 +193,17 @@
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 
+(defadvice org-export-output-file-name (before org-add-export-dir activate)
+  "Modifies org-export to place exported files in a different directory"
+  (when (not pub-dir)
+      (setq pub-dir "export")
+      (when (not (file-directory-p pub-dir))
+       (make-directory pub-dir))))
+
+;; Always redisplay inline images after executing SRC block
+(eval-after-load 'org
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
+
 
 (use-package org-roam
   :ensure t
@@ -201,13 +214,30 @@
 	  ("C-c r i" . org-roam-node-insert ) )
   :config
   (org-roam-setup) )
-
+[[id:0e776a6a-0382-4f2e-8178-bf071d0d3dfe][AdKOMM]]
 (use-package projectile)
 (setq projectile-project-search-path '(
 				       ( "~/Documents/MKS" . 2)
 				       ( "~/Documents/Projects" . 2)
+				       ( "~/Documents/org-roam" . 1)
 				       ( "~/Documents/org" . 1 ) ) )
+(setq projectile-generic-command "fd . -0 --type f --color=never")
 (projectile-mode +1)
+
+
+
+(use-package plantuml-mode
+  :init
+    (setq plantuml-default-exec-mode 'jar)
+    (setq plantuml-jar-path "~/toolz/plantuml/plantuml.jar")
+    (setq org-plantuml-jar-path (expand-file-name "~/toolz/plantuml/plantuml.jar"))
+    (setq org-startup-with-inline-images t)
+    (add-to-list 'org-src-lang-modes '("puml" . plantuml))
+    (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+
+
+;; Enable plantuml-mode for PlantUML files
+(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
 
 
 (setq evil-want-C-u-scroll t)
@@ -225,6 +255,8 @@
 (setq org-time-stamp-custom-formats '("<%d-%m-%y>". "<%d-%m-%y %a %H:%M>") )
 
 
+(auto-image-file-mode 1)
+
 (require 'lsp-setup.el)
 (require 'appearance.el)
 (require 'keybinds.el)
@@ -240,7 +272,7 @@
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(org-agenda-files '("~/Documents/org/agenda.org"))
  '(package-selected-packages
-   '(org-roam ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(plantuml-mode org-roam ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
