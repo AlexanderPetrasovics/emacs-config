@@ -40,6 +40,9 @@
 :ensure t
 :config (add-hook 'java-mode-hook 'lsp))
 
+(use-package groovy-mode
+  :ensure t)
+
 (use-package rustic
 :ensure t
 :config (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
@@ -54,6 +57,8 @@
 (use-package clojure-mode 
   :ensure t )
 
+(add-to-list 'cider-jack-in-cljs-dependencies '("org.clojure/clojurescript" "1.11.4"))
+
 (add-hook 'clojure-mode-hook 'lsp)
 (add-hook 'clojurescript-mode-hook 'lsp)
 (add-hook 'clojurec-mode-hook 'lsp)
@@ -62,8 +67,8 @@
       read-process-output-max (* 1024 1024)
       treemacs-space-between-root-nodes nil
       company-minimum-prefix-length 1
-      ; lsp-enable-indentation nil ; uncomment to use cider indentation instead of lsp
-      ; lsp-enable-completion-at-point nil ; uncomment to use cider completion instead of lsp
+       lsp-enable-indentation nil ; uncomment to use cider indentation instead of lsp
+       lsp-enable-completion-at-point nil ; uncomment to use cider completion instead of lsp
       )
 
 (use-package lsp-treemacs

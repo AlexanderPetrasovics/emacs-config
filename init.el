@@ -128,6 +128,10 @@
 (which-key-mode)
 (company-mode)
 
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hok #'lsp-enable-which-key-integration))
+
 (require 'company-web-html)        
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -274,7 +278,7 @@
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(org-agenda-files '("~/Documents/org/agenda.org"))
  '(package-selected-packages
-   '(cider clojure-mode closure-lsp plantuml-mode org-roam ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
+   '(groovy-mode cider clojure-mode closure-lsp plantuml-mode org-roam ox-gfm all-the-icons org-bullets magit rustic lsp-rustic lsp-rust-analyzer lsp-rust flycheck lsp-ui lsp-java lsp-mode company counsel ivy smart-mode-line-powerline-theme smart-mode-line vterm ibuffer-vc iBuffer which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

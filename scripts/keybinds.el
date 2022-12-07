@@ -63,7 +63,10 @@
 (evil-define-key 'normal 'global (kbd "<leader>bS") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-this-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>bb") 'ibuffer)
+
   ;; :bind ("C-x C-b" . ibuffer)
+
+(evil-define-key 'normal 'global (kbd "<leader>wt") 'treemacs)
 
 ;; Windows
 
@@ -76,6 +79,15 @@
 (evil-define-key 'normal 'global (kbd "<leader>wl") 'windmove-right)
 (evil-define-key 'normal 'global (kbd "<leader>wj") 'windmove-down)
 (evil-define-key 'normal 'global (kbd "<leader>wk") 'windmove-up)
+
+;; LSP Stuff
+
+;(evil-define-key 'normal lsp-mode-map (kbd "<leader>c") 'lsp-treemacs-implementations)
+;(evil-define-key 'normal lsp-command-map (kbd "<leader>c") 'lsp-keymap-prefix)
+(evil-define-key 'normal lsp-command-map (kbd "<leader>gd") 'lsp-goto-type-definition)
+(evil-define-key 'normal lsp-command-map (kbd "<leader>gi") 'lsp-goto-implementation)
+(evil-define-key 'normal lsp-command-map (kbd "<leader>lr") 'lsp-treemacs-references)
+(evil-define-key 'normal lsp-command-map (kbd "<leader>li") 'lsp-treemacs-implementations)
 
 
 
